@@ -89,6 +89,9 @@ Work in progress!
 
 ### Similar reporitories
 
-Work in progress!
+Quaternion layers are borrowed from:
+
+* [Quaternion-Neural-Networks](https://github.com/TParcollet/Quaternion-Neural-Networks).
+
 
 ### Cite
