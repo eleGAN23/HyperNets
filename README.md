@@ -3,7 +3,7 @@ Hypercomplex Neural Networks with PyTorch: this repository would be a container 
 
 ## Lightweight Convolutional Neural Networks By Hypercomplex Parameterization
 
-### Eleonora Grassucci, Aston Zhang, and Danilo Comminiello
+### [Eleonora Grassucci](https://scholar.google.it/citations?user=Jcv0TgQAAAAJ&hl=it&authuser=1), [Aston Zhang](https://www.astonzhang.com/), and [Danilo Comminiello](https://danilocomminiello.site.uniroma1.it/)
 
 ### Abstract
 
