@@ -1,7 +1,5 @@
 # -*- coding: utf-8 -*-
 """
-Created on Sun Dec 13 11:32:43 2020
-
 @author: Eleonora
 """
 
