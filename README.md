@@ -1,5 +1,5 @@
 # Hyper
-Hypercomplex Neural Networks with PyTorch: this repository would be a container for hypercomplex neural network modules to facilitate research in this topic.
+Hypercomplex Neural Networks with PyTorch: this repository would be a container for hypercomplex neural network modules to facilitate research in this topic. 
 
 ## Lightweight Convolutional Neural Networks By Hypercomplex Parameterization
 
