@@ -1,0 +1,15 @@
+--epochs=50
+--batch_size=128
+--get_iter_time=False
+--get_inf_time=False
+--cuda=True
+--gpu_num=5
+--seed=1202
+--Dataset=SVHN
+--lr=0.01
+--optim=SGD
+--momentum=0.9
+--scheduler=cosine
+--model=phmresnet50large
+--quat_data=True
+--n=4

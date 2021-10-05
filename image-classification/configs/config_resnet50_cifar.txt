@@ -1,0 +1,16 @@
+--epochs=200
+--batch_size=128
+--get_iter_time=False
+--get_inf_time=False
+--cuda=True
+--gpu_num=0
+--seed=1656079
+--Dataset=CIFAR100
+--lr=0.1
+--optim=SGD
+--momentum=0.9
+--scheduler=cosine
+--model=phmresnet152large
+--quat_data=True
+--n=4
+--train_dir=/var/datasets/CIFAR100

@@ -1,0 +1,10 @@
+--epochs=50
+--batch_size=128
+--cuda=True
+--seed=1202
+--gpu_num=3
+--Dataset=SVHN
+--lr=0.01
+--model=qvgg16
+--quat_data=True
+--n=2
