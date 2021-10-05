@@ -2,7 +2,7 @@ import math
 
 import torch.nn as nn
 import torch.nn.init as init
-from hypercomplex_layers import PHMConv, PHMLinear
+from ..hypercomplex_layers import PHConv, PHMLinear
 
 __all__ = [
     'VGG', 'vgg11', 'vgg11_bn', 'vgg13', 'vgg13_bn', 'vgg16', 'vgg16_bn',
@@ -10,12 +10,12 @@ __all__ = [
 ]
 
 
-class PHMVGG(nn.Module):
+class PHCVGG(nn.Module):
     '''
     VGG model 
     '''
     def __init__(self, features, n, large=False, num_classes=10):
-        super(PHMVGG, self).__init__()
+        super(PHCVGG, self).__init__()
         self.features = features
         if large:
             filters = [648, 516]
@@ -52,7 +52,7 @@ def make_layers(cfg, batch_norm=False, n=1, channels=3):
         if v == 'M':
             layers += [nn.MaxPool2d(kernel_size=2, stride=2)]
         else:
-            conv2d = PHMConv(n, in_channels, v, kernel_size=3, padding=1)
+            conv2d = PHConv(n, in_channels, v, kernel_size=3, padding=1)
             if batch_norm:
                 layers += [conv2d, nn.BatchNorm2d(v), nn.ReLU(inplace=True)]
             else:
@@ -73,49 +73,49 @@ cfg = {
 }
 
 
-def phmvgg11():
+def phcvgg11():
     """VGG 11-layer model (configuration "A")"""
-    return PHMVGG(make_layers(cfg['A']))
+    return PHCVGG(make_layers(cfg['A']))
 
 
-def phmvgg11_bn(channels=3, n=1):
+def phcvgg11_bn(channels=3, n=1):
     """VGG 11-layer model (configuration "A") with batch normalization"""
-    return PHMVGG(make_layers(cfg['A'], batch_norm=True, n=n, channels=channels))
+    return PHCVGG(make_layers(cfg['A'], batch_norm=True, n=n, channels=channels))
 
-def phmvgg11large_bn(channels=3, n=1):
+def phcvgg11large_bn(channels=3, n=1):
     """VGG 11-layer model (configuration "A") with batch normalization"""
-    return PHMVGG(make_layers(cfg['A_large'], batch_norm=True, n=n, channels=channels))
+    return PHCVGG(make_layers(cfg['A_large'], batch_norm=True, n=n, channels=channels))
 
 
-def phmvgg13():
+def phcvgg13():
     """VGG 13-layer model (configuration "B")"""
-    return PHMVGG(make_layers(cfg['B']))
+    return PHCVGG(make_layers(cfg['B']))
 
 
-def phmvgg13_bn():
+def phcvgg13_bn():
     """VGG 13-layer model (configuration "B") with batch normalization"""
-    return PHMVGG(make_layers(cfg['B'], batch_norm=True))
+    return PHCVGG(make_layers(cfg['B'], batch_norm=True))
 
 
-def phmvgg16():
+def phcvgg16():
     """VGG 16-layer model (configuration "D")"""
-    return PHMVGG(make_layers(cfg['D']))
+    return PHCVGG(make_layers(cfg['D']))
 
 
-def phmvgg16_bn(channels=4, n=1):
+def phcvgg16_bn(channels=4, n=1):
     """VGG 16-layer model (configuration "D") with batch normalization"""
-    return PHMVGG(make_layers(cfg['D'], batch_norm=True, n=n, channels=channels), n=n)
+    return PHCVGG(make_layers(cfg['D'], batch_norm=True, n=n, channels=channels), n=n)
 
 
-def phmvgg19():
+def phcvgg19():
     """VGG 19-layer model (configuration "E")"""
-    return PHMVGG(make_layers(cfg['E']))
+    return PHCVGG(make_layers(cfg['E']))
 
 
-def phmvgg19_bn():
+def phcvgg19_bn():
     """VGG 19-layer model (configuration 'E') with batch normalization"""
-    return PHMVGG(make_layers(cfg['E'], batch_norm=True))
+    return PHCVGG(make_layers(cfg['E'], batch_norm=True))
 
-def phmvgg19large_bn(channels=3, n=1, num_classes=10):
+def phcvgg19large_bn(channels=3, n=1, num_classes=10):
     """VGG 19-layer model (configuration 'E') with batch normalization"""
-    return PHMVGG(make_layers(cfg['E_large'], batch_norm=True, n=n, channels=channels), n=n, large=True, num_classes=num_classes)
+    return PHCVGG(make_layers(cfg['E_large'], batch_norm=True, n=n, channels=channels), n=n, large=True, num_classes=num_classes)

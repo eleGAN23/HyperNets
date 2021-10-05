@@ -1,11 +1,3 @@
-##########################################################
-# pytorch-qnn v1.0
-# Titouan Parcollet
-# LIA, Université d'Avignon et des Pays du Vaucluse
-# ORKIS, Aix-en-provence
-# October 2018
-##########################################################
-
 import numpy                   as np
 from   numpy.random            import RandomState
 import torch
@@ -76,13 +68,13 @@ class PHMLinear(nn.Module):
     init.uniform_(self.bias, -bound, bound)
 
 #############################
-## CONVOLUTIONAL PHM LAYER ##
+## CONVOLUTIONAL PH LAYER ##
 #############################
 
-class PHMConv(Module):
+class PHConv(Module):
 
   def __init__(self, n, in_features, out_features, kernel_size, padding=0, stride=1, cuda=True):
-    super(PHMConv, self).__init__()
+    super(PHConv, self).__init__()
     self.n = n
     self.in_features = in_features
     self.out_features = out_features

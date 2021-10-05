@@ -7,7 +7,7 @@ Reference:
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
-from hypercomplex_layers import PHMConv, PHMLinear
+from ..hypercomplex_layers import PHConv, PHMLinear
 
 
 class BasicBlock(nn.Module):
@@ -15,17 +15,17 @@ class BasicBlock(nn.Module):
 
     def __init__(self, in_planes, planes, stride=1, n=4):
         super(BasicBlock, self).__init__()
-        self.conv1 = PHMConv(n,
+        self.conv1 = PHConv(n,
             in_planes, planes, kernel_size=3, stride=stride, padding=1)
         self.bn1 = nn.BatchNorm2d(planes)
-        self.conv2 = PHMConv(n, planes, planes, kernel_size=3,
+        self.conv2 = PHConv(n, planes, planes, kernel_size=3,
                                stride=1, padding=1)
         self.bn2 = nn.BatchNorm2d(planes)
 
         self.shortcut = nn.Sequential()
         if stride != 1 or in_planes != self.expansion*planes:
             self.shortcut = nn.Sequential(
-                PHMConv(n, in_planes, self.expansion*planes,
+                PHConv(n, in_planes, self.expansion*planes,
                           kernel_size=1, stride=stride,),
                 nn.BatchNorm2d(self.expansion*planes)
             )
@@ -43,18 +43,18 @@ class Bottleneck(nn.Module):
 
     def __init__(self, in_planes, planes, stride=1, n=4):
         super(Bottleneck, self).__init__()
-        self.conv1 = PHMConv(n, in_planes, planes, kernel_size=1, stride=1)
+        self.conv1 = PHConv(n, in_planes, planes, kernel_size=1, stride=1)
         self.bn1 = nn.BatchNorm2d(planes)
-        self.conv2 = PHMConv(n, planes, planes, kernel_size=3,
+        self.conv2 = PHConv(n, planes, planes, kernel_size=3,
                                stride=stride, padding=1)
         self.bn2 = nn.BatchNorm2d(planes)
-        self.conv3 = PHMConv(n, planes, self.expansion * planes, kernel_size=1, stride=1)
+        self.conv3 = PHConv(n, planes, self.expansion * planes, kernel_size=1, stride=1)
         self.bn3 = nn.BatchNorm2d(self.expansion*planes)
 
         self.shortcut = nn.Sequential()
         if stride != 1 or in_planes != self.expansion*planes:
             self.shortcut = nn.Sequential(
-                PHMConv(n, in_planes, self.expansion*planes,
+                PHConv(n, in_planes, self.expansion*planes,
                           kernel_size=1, stride=stride),
                 nn.BatchNorm2d(self.expansion*planes)
             )
@@ -68,12 +68,12 @@ class Bottleneck(nn.Module):
         return out
 
 
-class PHMResNet(nn.Module):
+class PHCResNet(nn.Module):
     def __init__(self, block, num_blocks, channels=4, n=4, num_classes=10):
-        super(PHMResNet, self).__init__()
+        super(PHCResNet, self).__init__()
         self.in_planes = 64
 
-        self.conv1 = PHMConv(n, channels, 64, kernel_size=3,
+        self.conv1 = PHConv(n, channels, 64, kernel_size=3,
                                stride=1, padding=1)
         self.bn1 = nn.BatchNorm2d(64)
         self.layer1 = self._make_layer(block, 64, num_blocks[0], stride=1, n=n)
@@ -102,12 +102,12 @@ class PHMResNet(nn.Module):
         return out
 
 
-class PHMResNetLarge(nn.Module):
+class PHCResNetLarge(nn.Module):
     def __init__(self, block, num_blocks, channels=4, n=4, num_classes=10):
-        super(PHMResNetLarge, self).__init__()
+        super(PHCResNetLarge, self).__init__()
         self.in_planes = 60
 
-        self.conv1 = PHMConv(n, channels, 60, kernel_size=3,
+        self.conv1 = PHConv(n, channels, 60, kernel_size=3,
                                stride=1, padding=1)
         self.bn1 = nn.BatchNorm2d(60)
         self.layer1 = self._make_layer(block, 60, num_blocks[0], stride=1, n=n)
@@ -136,36 +136,36 @@ class PHMResNetLarge(nn.Module):
         return out
 
 
-def PHMResNet18():
-    return PHMResNet(BasicBlock, [2, 2, 2, 2])
+def PHCResNet18():
+    return PHCResNet(BasicBlock, [2, 2, 2, 2])
 
-def PHMResNet18Large(channels=4, n=4, num_classes=10):
-    return PHMResNetLarge(BasicBlock, [2, 2, 2, 2], channels=channels, n=n, num_classes=num_classes)
-
-
-def PHMResNet34():
-    return PHMResNet(BasicBlock, [3, 4, 6, 3])
+def PHCResNet18Large(channels=4, n=4, num_classes=10):
+    return PHCResNetLarge(BasicBlock, [2, 2, 2, 2], channels=channels, n=n, num_classes=num_classes)
 
 
-def PHMResNet50(channels=4, n=4):
-    return PHMResNet(Bottleneck, [3, 4, 6, 3], channels=channels, n=n)
-
-def PHMResNet50Large(channels=4, n=4, num_classes=10):
-    return PHMResNetLarge(Bottleneck, [3, 4, 6, 3], channels=channels, n=n, num_classes=num_classes)
+def PHCResNet34():
+    return PHCResNet(BasicBlock, [3, 4, 6, 3])
 
 
-def PHMResNet101():
-    return PHMResNet(Bottleneck, [3, 4, 23, 3])
+def PHCResNet50(channels=4, n=4):
+    return PHCResNet(Bottleneck, [3, 4, 6, 3], channels=channels, n=n)
+
+def PHCResNet50Large(channels=4, n=4, num_classes=10):
+    return PHCResNetLarge(Bottleneck, [3, 4, 6, 3], channels=channels, n=n, num_classes=num_classes)
 
 
-def PHMResNet152():
-    return PHMResNet(Bottleneck, [3, 8, 36, 3])
+def PHCResNet101():
+    return PHCResNet(Bottleneck, [3, 4, 23, 3])
 
-def PHMResNet152Large(channels=4, n=4, num_classes=10):
-    return PHMResNetLarge(Bottleneck, [3, 8, 36, 3], channels=channels, n=n, num_classes=num_classes)
+
+def PHCResNet152():
+    return PHCResNet(Bottleneck, [3, 8, 36, 3])
+
+def PHCResNet152Large(channels=4, n=4, num_classes=10):
+    return PHCResNetLarge(Bottleneck, [3, 8, 36, 3], channels=channels, n=n, num_classes=num_classes)
 
 def test():
-    net = PHMResNet18()
+    net = PHCResNet18()
     y = net(torch.randn(1, 3, 32, 32))
     print(y.size())
 

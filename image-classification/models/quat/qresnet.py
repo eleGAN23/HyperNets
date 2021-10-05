@@ -7,7 +7,7 @@ Reference:
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
-from hypercomplex_layers import QuaternionConv, QuaternionLinear
+from ..hypercomplex_layers import QuaternionConv, QuaternionLinear
 
 
 class BasicBlock(nn.Module):

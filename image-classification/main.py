@@ -1,36 +1,37 @@
 import argparse
+import math
+import sys
+import time
+from functools import partial
+
+import matplotlib.pyplot as plt
+import numpy as np
 import torch
-import torchvision
-import torchvision.transforms as transforms
 import torch.nn as nn
 import torch.nn.functional as F
 import torch.optim as optim
-import matplotlib.pyplot as plt
-import numpy as np
-import time
+import torchvision
+import torchvision.transforms as transforms
 import wandb
-import math
-from torch.optim.lr_scheduler import CosineAnnealingLR, StepLR, MultiStepLR, CyclicLR
-from functools import partial
+from torch.optim.lr_scheduler import (CosineAnnealingLR, CyclicLR, MultiStepLR,
+                                      StepLR)
 
-
-
-import sys
 sys.path.append('../utils')
-import argparse 
-import torch
-import torch.optim as optim
-from utils.dataloaders import CIFAR10_dataloader, SVHN_dataloader, STL10_dataloader, CIFAR100_dataloader
-
-from training import Trainer
+import argparse
+import os
 # from torch import nn
 import random
-import numpy as np
-import os
-from GetModel import GetModel
-from utils.readFile import readFile
 from multiprocessing import cpu_count
 
+import numpy as np
+import torch
+import torch.optim as optim
+
+from GetModel import GetModel
+from training import Trainer
+from utils.dataloaders import (CIFAR10_dataloader, CIFAR100_dataloader,
+                               STL10_dataloader, SVHN_dataloader)
+from utils.readFile import readFile
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()#fromfile_prefix_chars='@')
@@ -47,7 +48,7 @@ if __name__ == '__main__':
     
     parser.add_argument('--Dataset', type=str, default='SVHN', help='SVHN, CIFAR10')
     parser.add_argument('--image_size', type=int, default=32)
-    parser.add_argument('--model', type=str, default='resnet20', help='Models: resnet20, qresnet20')
+    parser.add_argument('--model', type=str, default='resnet20', help='Models: ...')
     parser.add_argument('--batch_size', type=int, default=64)
     parser.add_argument('--epochs', type=int, default=10)
     parser.add_argument('--lr', type=float, default=0.0002)
@@ -158,7 +159,7 @@ if __name__ == '__main__':
         optim_name = "Adam"
         optimizer = optim.Adam(net.parameters(), lr=lr, weight_decay=opt.weight_decay, betas=(0.5, 0.999))
     
-    # Add scheduler!!!
+    # Add scheduler
     if opt.scheduler == "cosine":
         scheduler = CosineAnnealingLR(optimizer, T_max=200)
     elif opt.scheduler == "StepLR":
@@ -167,17 +168,6 @@ if __name__ == '__main__':
         scheduler = MultiStepLR(optimizer, milestones=[59, 119, 159], gamma=0.15)
     elif opt.scheduler == "CyclicLR":
         scheduler = CyclicLR(optimizer, base_lr=0.001, max_lr=0.1)
-
-
-    # scheduler_tune = ASHAScheduler(
-    #     metric="loss",
-    #     mode="min",
-    #     max_t=100,
-    #     grace_period=1,
-    #     reduction_factor=2)
-    # reporter = CLIReporter(
-    #     # parameter_columns=["l1", "l2", "lr", "batch_size"],
-    #     metric_columns=["loss", "accuracy", "training_iteration"]) 
 
 
     '''Train model'''
@@ -195,24 +185,8 @@ if __name__ == '__main__':
                       )
     
     
-#     trainer.train(train_loader, eval_loader, test_loader)
+    trainer.train(train_loader, eval_loader, test_loader)
     trainer.test(test_loader, get_params=False)
-
-
-    # result = tune.run(
-    #     partial(trainer.train(train_loader, eval_loader, test_loader), data_dir=opt.train_dir),
-    #     config=config,
-    #     num_samples=10,
-    #     scheduler=scheduler_tune,
-    #     progress_reporter=reporter)
-
-    # best_trial = result.get_best_trial("loss", "min", "last")
-    # print("Best trial config: {}".format(best_trial.config))
-    # print("Best trial final validation loss: {}".format(
-    #     best_trial.last_result["loss"]))
-    # print("Best trial final validation accuracy: {}".format(
-    #     best_trial.last_result["accuracy"]))
-
     
 
 ############################################################################################

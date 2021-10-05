@@ -7,14 +7,8 @@ import numpy as np
 from matplotlib import pyplot
 import math
 import sys
-from hypercomplex_layers import PHMConv
+from hypercomplex_layers import PHConv
 
-# from fvcore.nn import FlopCountAnalysis, flop_count_table
-
-
-# for lr scheduler custom check:
-# https://github.com/szagoruyko/wide-residual-networks/blob/master/pytorch/main.py
-# https://github.com/xternalz/WideResNet-pytorch/blob/master/train.py
 
 
 class Trainer():
@@ -70,18 +64,7 @@ class Trainer():
             iter_time = []
             for i, data in enumerate(train_loader, 0):
                 inputs, labels = data
-                # print("Images size:", inputs.size())
-                # for i, img in enumerate(inputs):
-                #     print("Single image size", img.size())
-                #     print(img)
-                #     # print(data)
-                #     # break
-                #     pyplot.ioff()
-                #     pyplot.axis("off")
-                #     imgs = img.permute(1,2,0)
-                #     img_path = "C:/Users/eleon/Documents/Dottorato/Code/QConv_Kronecker/images/" + str(i) + '.png'
-                #     pyplot.imsave(img_path, imgs.numpy())
-                # break
+
                 if self.use_cuda:
                     inputs, labels = inputs.cuda('cuda:%i' %self.gpu_num), labels.cuda('cuda:%i' %self.gpu_num)
 
@@ -91,9 +74,6 @@ class Trainer():
                     start_iter_time = time.time()
                 outputs = self.net(inputs)
 
-                # print("LABELS", labels)
-                # print("OUTPUTS", outputs)
-
                 loss = criterion(outputs, labels)
 
                 if self.l1_reg:
@@ -101,7 +81,7 @@ class Trainer():
                     regularization_loss = 0.0
                     for child in self.net.children():
                         for layer in child.modules():
-                            if isinstance(layer, PHMConv):
+                            if isinstance(layer, PHConv):
                                 for param in layer.a:
                                     regularization_loss += torch.sum(abs(param))
                     loss += 0.001 * regularization_loss
@@ -110,17 +90,7 @@ class Trainer():
                 loss.backward()
 
                 self.optimizer.step()
-
-           
-#                 print('Storing checkpoint')
-#                 checkpoint_path = self.checkpoints_folder + "/" + self.net.__class__.__name__ + ".pt"
-
-#                 # Save checkpoint
-#                 torch.save(self.net.state_dict(), checkpoint_path)
-     
-#                 sys.exit(0)
-                
-                
+         
                 
                 if self.get_iter_time:
                     end_iter_time = time.time()
@@ -159,9 +129,6 @@ class Trainer():
             wandb.log({"val loss": running_loss_eval/j})
             wandb.log({"val acc": acc})
             
-            # Report to Tune for hyperparameter optimization
-#             tune.report(loss=(running_loss_eval/j), accuracy=acc)
-
             running_loss_train = 0.0
             running_loss_eval = 0.0
 
@@ -221,13 +188,6 @@ class Trainer():
                     total += labels.size(0)
                     correct += (predicted == labels).sum().item()
 
-                # Flops count
-                # flops = FlopCountAnalysis(self.net, images)
-                # flops.total()
-                # flops.by_operator()
-                # flops.by_module()
-                # flops.by_module_and_operator()
-                # print(flop_count_table(flops))
             if self.get_inf_time:
                 inference_time = end_inf_time - start_inf_time
                 print("Inference time: %f" %inference_time)
