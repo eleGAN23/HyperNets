@@ -5,6 +5,8 @@ Hypercomplex Neural Networks with PyTorch: this repository would be a container 
 
 ### [Eleonora Grassucci](https://scholar.google.it/citations?user=Jcv0TgQAAAAJ&hl=it&authuser=1), [Aston Zhang](https://www.astonzhang.com/), and [Danilo Comminiello](https://danilocomminiello.site.uniroma1.it/)
 
+[[Abstract on OpenReview](https://openreview.net/forum?id=S5qdnMhf7R)] [[Paper on OpenReview](https://openreview.net/pdf?id=S5qdnMhf7R)]
+
 ## Abstract
 
 Hypercomplex neural networks have proved to reduce the overall number of parameters while ensuring valuable performances by leveraging the properties of Clifford algebras. Recently, hypercomplex linear layers have been further improved by involving efficient parameterized Kronecker products. In this paper, we define the parameterization of hypercomplex convolutional layers to develop lightweight and efficient large-scale convolutional models. Our method grasps the convolution rules and the filters organization directly from data without requiring a rigidly predefined domain structure to follow. The proposed approach is flexible to operate in any user-defined or tuned domain, from 1D to nD regardless of whether the algebra rules are preset.
@@ -91,6 +93,9 @@ Specify the hyperparameters options.
 Soon: PHC layer for 1D convolutions!
 
 ## Similar reporitories
+
+* [Quaternion Generative Adversarial Networks](https://github.com/eleGAN23/QGAN).
+* [A Quaternion-Valued Variational Autoencoder](https://github.com/eleGAN23/QVAE).
 
 Quaternion layers are borrowed from:
 
