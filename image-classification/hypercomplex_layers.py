@@ -61,8 +61,8 @@ class PHMLinear(nn.Module):
       self.in_features, self.out_features, self.bias is not None)
     
   def reset_parameters(self) -> None:
-    init.kaiming_uniform_(self.a, a=math.sqrt(5))
-    init.kaiming_uniform_(self.s, a=math.sqrt(5))
+    init.kaiming_uniform_(self.A, a=math.sqrt(5))
+    init.kaiming_uniform_(self.S, a=math.sqrt(5))
     fan_in, _ = init._calculate_fan_in_and_fan_out(self.placeholder)
     bound = 1 / math.sqrt(fan_in)
     init.uniform_(self.bias, -bound, bound)
@@ -125,8 +125,8 @@ class PHConv(Module):
       self.in_features, self.out_features, self.bias is not None)
     
   def reset_parameters(self) -> None:
-    init.kaiming_uniform_(self.a, a=math.sqrt(5))
-    init.kaiming_uniform_(self.s, a=math.sqrt(5))
+    init.kaiming_uniform_(self.A, a=math.sqrt(5))
+    init.kaiming_uniform_(self.F, a=math.sqrt(5))
     fan_in, _ = init._calculate_fan_in_and_fan_out(self.placeholder)
     bound = 1 / math.sqrt(fan_in)
     init.uniform_(self.bias, -bound, bound)
