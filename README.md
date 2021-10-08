@@ -19,16 +19,16 @@ As a result, the proposed method operates with 1/n free parameters as regards it
 The core of the approach is the sum of Kronecker products which grasps the convolution rule and the filters organization directly from data. The higlights of our approach is defined in:
 
   ```python
-  def kronecker_product1(self, a, s):
-    siz1 = torch.Size(torch.tensor(a.shape[-2:]) * torch.tensor(s.shape[-4:-2]))
-    siz2 = torch.Size(torch.tensor(s.shape[-2:]))
-    res = a.unsqueeze(-1).unsqueeze(-3).unsqueeze(-1).unsqueeze(-1) * s.unsqueeze(-4).unsqueeze(-6)
+  def kronecker_product1(self, A, F):
+    siz1 = torch.Size(torch.tensor(A.shape[-2:]) * torch.tensor(F.shape[-4:-2]))
+    siz2 = torch.Size(torch.tensor(F.shape[-2:]))
+    res = A.unsqueeze(-1).unsqueeze(-3).unsqueeze(-1).unsqueeze(-1) * F.unsqueeze(-4).unsqueeze(-6)
     siz0 = res.shape[:1]
     out = res.reshape(siz0 + siz1 + siz2)
     return out
    
   def forward(self, input):
-    self.weight = torch.sum(self.kronecker_product1(self.a, self.s), dim=0)
+    self.weight = torch.sum(self.kronecker_product1(self.A, self.F), dim=0)
     input = input.type(dtype=self.weight.type())      
     return F.conv2d(input, weight=self.weight, stride=self.stride, padding=self.padding)
 
