@@ -26,9 +26,9 @@ class PHMLinear(nn.Module):
 
     self.bias = nn.Parameter(torch.Tensor(out_features))
 
-    self.a = nn.Parameter(torch.nn.init.xavier_uniform_(torch.zeros((n, n, n))))
+    self.A = nn.Parameter(torch.nn.init.xavier_uniform_(torch.zeros((n, n, n))))
 
-    self.s = nn.Parameter(torch.nn.init.xavier_uniform_(torch.zeros((n, self.out_features//n, self.in_features//n))))
+    self.S = nn.Parameter(torch.nn.init.xavier_uniform_(torch.zeros((n, self.out_features//n, self.in_features//n))))
 
     self.weight = torch.zeros((self.out_features, self.in_features))
 
@@ -47,12 +47,12 @@ class PHMLinear(nn.Module):
   def kronecker_product2(self):
     H = torch.zeros((self.out_features, self.in_features))
     for i in range(self.n):
-        H = H + torch.kron(self.a[i], self.s[i])
+        H = H + torch.kron(self.A[i], self.S[i])
     return H
 
   def forward(self, input):
-    self.weight = torch.sum(self.kronecker_product1(self.a, self.s), dim=0)
-#     self.weight = self.kronecker_product2()
+    self.weight = torch.sum(self.kronecker_product1(self.A, self.S), dim=0)
+#     self.weight = self.kronecker_product2() <- SLOWER
     input = input.type(dtype=self.weight.type())
     return F.linear(input, weight=self.weight, bias=self.bias)
 
@@ -83,8 +83,8 @@ class PHConv(Module):
     self.cuda = cuda
 
     self.bias = nn.Parameter(torch.Tensor(out_features))
-    self.a = nn.Parameter(torch.nn.init.xavier_uniform_(torch.zeros((n, n, n))))
-    self.s = nn.Parameter(torch.nn.init.xavier_uniform_(
+    self.A = nn.Parameter(torch.nn.init.xavier_uniform_(torch.zeros((n, n, n))))
+    self.F = nn.Parameter(torch.nn.init.xavier_uniform_(
         torch.zeros((n, self.out_features//n, self.in_features//n, kernel_size, kernel_size))))
     self.weight = torch.zeros((self.out_features, self.in_features))
     self.kernel_size = kernel_size
@@ -93,10 +93,10 @@ class PHConv(Module):
     bound = 1 / math.sqrt(fan_in)
     init.uniform_(self.bias, -bound, bound)
 
-  def kronecker_product1(self, a, s):
-    siz1 = torch.Size(torch.tensor(a.shape[-2:]) * torch.tensor(s.shape[-4:-2]))
-    siz2 = torch.Size(torch.tensor(s.shape[-2:]))
-    res = a.unsqueeze(-1).unsqueeze(-3).unsqueeze(-1).unsqueeze(-1) * s.unsqueeze(-4).unsqueeze(-6)
+  def kronecker_product1(self, A, F):
+    siz1 = torch.Size(torch.tensor(A.shape[-2:]) * torch.tensor(F.shape[-4:-2]))
+    siz2 = torch.Size(torch.tensor(F.shape[-2:]))
+    res = A.unsqueeze(-1).unsqueeze(-3).unsqueeze(-1).unsqueeze(-1) * F.unsqueeze(-4).unsqueeze(-6)
     siz0 = res.shape[:1]
     out = res.reshape(siz0 + siz1 + siz2)
     return out
@@ -106,12 +106,12 @@ class PHConv(Module):
     if self.cuda:
         H = H.cuda()
     for i in range(self.n):
-        kron_prod = torch.kron(self.a[i], self.s[i]).view(self.out_features, self.in_features, self.kernel_size, self.kernel_size)
+        kron_prod = torch.kron(self.A[i], self.F[i]).view(self.out_features, self.in_features, self.kernel_size, self.kernel_size)
         H = H + kron_prod
     return H
 
   def forward(self, input):
-    self.weight = torch.sum(self.kronecker_product1(self.a, self.s), dim=0)
+    self.weight = torch.sum(self.kronecker_product1(self.A, self.F), dim=0)
     # self.weight = self.kronecker_product2()
     if self.cuda:
         self.weight = self.weight.cuda()
