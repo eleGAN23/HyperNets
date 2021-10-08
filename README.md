@@ -34,6 +34,10 @@ The core of the approach is the sum of Kronecker products which grasps the convo
 
    ```
 
+Te PHC layer, by setting n=4, is able to subsume the Hamilton rule to organize filters in the convolution as:
+
+<img src="Hamilton_prod.png" width="872" height="228"/>
+
 ## Usage
 
 ## Tutorials
