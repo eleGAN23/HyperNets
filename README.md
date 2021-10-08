@@ -1,18 +1,18 @@
 # HyperNets
 Hypercomplex Neural Networks with PyTorch: this repository would be a container for hypercomplex neural network modules to facilitate research in this topic. 
 
-## Lightweight Convolutional Neural Networks By Hypercomplex Parameterization
+# Lightweight Convolutional Neural Networks By Hypercomplex Parameterization
 
 ### [Eleonora Grassucci](https://scholar.google.it/citations?user=Jcv0TgQAAAAJ&hl=it&authuser=1), [Aston Zhang](https://www.astonzhang.com/), and [Danilo Comminiello](https://danilocomminiello.site.uniroma1.it/)
 
-### Abstract
+## Abstract
 
 Hypercomplex neural networks have proved to reduce the overall number of parameters while ensuring valuable performances by leveraging the properties of Clifford algebras. Recently, hypercomplex linear layers have been further improved by involving efficient parameterized Kronecker products. In this paper, we define the parameterization of hypercomplex convolutional layers to develop lightweight and efficient large-scale convolutional models. Our method grasps the convolution rules and the filters organization directly from data without requiring a rigidly predefined domain structure to follow. The proposed approach is flexible to operate in any user-defined or tuned domain, from 1D to nD regardless of whether the algebra rules are preset.
 Such a malleability allows processing multidimensional inputs in their natural domain without annexing further dimensions, as done, instead, in quaternion neural networks for 3D inputs like color images.
 As a result, the proposed method operates with 1/n free parameters as regards its analog in the real domain. We demonstrate the versatility of this approach to multiple domains of application by performing experiments on various image datasets as well as audio datasets in which our method outperforms real and quaternion-valued counterparts.
 
 
-### Parameterized Hypercomplex Convolutional (PHC) Layer
+## Parameterized Hypercomplex Convolutional (PHC) Layer
 
 The core of the approach is the sum of Kronecker products which grasps the convolution rule and the filters organization directly from data. The higlights of our approach is defined in:
 
@@ -32,25 +32,28 @@ The core of the approach is the sum of Kronecker products which grasps the convo
 
    ```
 
-### Usage
+## Usage
 
-### Tutorials
+## Tutorials
 
 The folder `tutorials` contain a set of tutorial to understand the Parameterized Hypercomplex Multiplication (PHM) layer and the Parameterized Hypercomplex Convolutional (PHC) layer. We develop simple toy examples to learn the matrices A that define algebra rules in order to demonstrate the effectiveness of the proposed approach.
 
-### Experiments on Image Classification
+* `PHM tutorial.ipynb` is a simple tutorial which shows how the PHM layer learns the Hamilton product between two pure quaternions.
+* `PHC tutorial.ipynb` is a simple tutorial which shows how the PHC layer learn the Hamilton rule to organize filters in convolution.
+* `Toy regression examples with PHM.ipynb` is a notebook containing some regression tasks.
+
+## Experiments on Image Classification
 
 To reproduce image classification experiments, please refer to the `image-classification` folder.
 
 * ```pip install -r requirements.txt```.
-
 * Choose the configurations in `configs` and run the experiment:
 
 ```python main.py --TextArgs=config_name.txt```.
 
 The experiment will be directly tracked on [Weight&Biases](https://wandb.ai/).
 
-### Experiments on Sound Event Detection
+## Experiments on Sound Event Detection
 
 To reproduce sound event detection experiments, please refer to the `sound-event-detection` folder.
 
@@ -83,15 +86,15 @@ We perform experiments with `epochs=1000`, `batch_size=16` and `input_channels=4
 
 Specify the hyperparameters options.
 
-### More will be added
+## More will be added
 
-Work in progress!
+Soon: PHC layer for 1D convolutions!
 
-### Similar reporitories
+## Similar reporitories
 
 Quaternion layers are borrowed from:
 
 * [Quaternion-Neural-Networks](https://github.com/TParcollet/Quaternion-Neural-Networks).
 
 
-### Cite
+## Cite
