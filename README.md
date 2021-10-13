@@ -7,6 +7,10 @@ Hypercomplex Neural Networks with PyTorch: this repository would be a container 
 
 [[Abstract on OpenReview](https://openreview.net/forum?id=S5qdnMhf7R)] [[Paper on OpenReview](https://openreview.net/pdf?id=S5qdnMhf7R)]
 
+
+[![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/lightweight-convolutional-neural-networks-by/on-1)](https://paperswithcode.com/sota/on-1?p=lightweight-convolutional-neural-networks-by)
+[![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/lightweight-convolutional-neural-networks-by/sound-event-detection-on-l3das21)](https://paperswithcode.com/sota/sound-event-detection-on-l3das21?p=lightweight-convolutional-neural-networks-by)
+
 ## Abstract
 
 Hypercomplex neural networks have proved to reduce the overall number of parameters while ensuring valuable performances by leveraging the properties of Clifford algebras. Recently, hypercomplex linear layers have been further improved by involving efficient parameterized Kronecker products. In this paper, we define the parameterization of hypercomplex convolutional layers to develop lightweight and efficient large-scale convolutional models. Our method grasps the convolution rules and the filters organization directly from data without requiring a rigidly predefined domain structure to follow. The proposed approach is flexible to operate in any user-defined or tuned domain, from 1D to nD regardless of whether the algebra rules are preset.
