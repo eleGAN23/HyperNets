@@ -8,7 +8,7 @@ Hypercomplex Neural Networks with PyTorch: this repository would be a container 
 [[Abstract on OpenReview](https://openreview.net/forum?id=S5qdnMhf7R)] [[Paper on OpenReview](https://openreview.net/pdf?id=S5qdnMhf7R)]
 
 
-[![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/lightweight-convolutional-neural-networks-by/on-1)](https://paperswithcode.com/sota/on-1?p=lightweight-convolutional-neural-networks-by)
+<!-- [![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/lightweight-convolutional-neural-networks-by/on-1)](https://paperswithcode.com/sota/on-1?p=lightweight-convolutional-neural-networks-by) -->
 [![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/lightweight-convolutional-neural-networks-by/sound-event-detection-on-l3das21)](https://paperswithcode.com/sota/sound-event-detection-on-l3das21?p=lightweight-convolutional-neural-networks-by)
 
 ## Abstract
@@ -111,3 +111,17 @@ Quaternion layers are borrowed from:
 
 
 ## Cite
+
+```
+@article{grassucci2021lightweight,
+      title={Lightweight Convolutional Neural Networks By Hypercomplex Parameterization}, 
+      author={Grassucci, E. and Zhang, A. and Comminiello, D.},
+      year={2021},
+      journal={ArXiv Preprint: arXiv:2110.04176},
+}
+```
+#### Resources
+
+For PHM please refer to:
+
+A. Zhang, Y. Tay, S. Zhang, A. Chan, A. T. Luu, S. C. Hui, and J. Fu.  "Beyond fully-connectedlayers with quaternions: Parameterization of hypercomplex multiplications with 1/n parameters.", _Int. Conf. on Machine Learning (ICML)_, 2021
