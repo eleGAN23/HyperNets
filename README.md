@@ -109,13 +109,3 @@ Quaternion layers are borrowed from:
 
 * [Quaternion-Neural-Networks](https://github.com/TParcollet/Quaternion-Neural-Networks).
 
-
-## Cite
-
-Soon.
-
-#### Resources
-
-For PHM please refer to:
-
-A. Zhang, Y. Tay, S. Zhang, A. Chan, A. T. Luu, S. C. Hui, and J. Fu.  "Beyond fully-connectedlayers with quaternions: Parameterization of hypercomplex multiplications with 1/n parameters.", _Int. Conf. on Machine Learning (ICML)_, 2021
