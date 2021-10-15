@@ -112,14 +112,8 @@ Quaternion layers are borrowed from:
 
 ## Cite
 
-```
-@article{grassucci2021lightweight,
-      title={Lightweight Convolutional Neural Networks By Hypercomplex Parameterization}, 
-      author={Grassucci, E. and Zhang, A. and Comminiello, D.},
-      year={2021},
-      journal={ArXiv Preprint: arXiv:2110.04176},
-}
-```
+Soon.
+
 #### Resources
 
 For PHM please refer to:
