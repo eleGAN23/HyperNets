@@ -1,6 +1,9 @@
 # HyperNets
 Hypercomplex Neural Networks with PyTorch: this repository would be a container for hypercomplex neural network modules to facilitate research in this topic. 
 
+### News
+:warning: PHC layer for 1D convolutions has been released! Check it in the file `layers/ph_layers.py`!
+
 # Lightweight Convolutional Neural Networks By Hypercomplex Parameterization
 
 ### [Eleonora Grassucci](https://scholar.google.it/citations?user=Jcv0TgQAAAAJ&hl=it&authuser=1), [Aston Zhang](https://www.astonzhang.com/), and [Danilo Comminiello](https://danilocomminiello.site.uniroma1.it/)
@@ -98,7 +101,7 @@ Specify the hyperparameters options.
 
 ## More will be added
 
-Soon: PHC layer for 1D convolutions!
+:warning: Soon!
 
 ## Similar reporitories
 
