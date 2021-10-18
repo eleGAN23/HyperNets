@@ -3,6 +3,7 @@ Hypercomplex Neural Networks with PyTorch: this repository would be a container 
 
 ### News :bomb:
 :warning: PHC layer for 1D convolutions has been released! Check it in the file `layers/ph_layers.py`!
+Thanks to Christian Brignone and Gioia Mancini for this contribution.
 
 # Lightweight Convolutional Neural Networks By Hypercomplex Parameterization
 
