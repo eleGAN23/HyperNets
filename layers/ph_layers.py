@@ -134,7 +134,7 @@ class PHMConv2d(Module):
     
 class PHConv1D(Module):
 
-  def __init__(self, n, in_features, out_features, kernel_size, padding=0, stride=1, dilation=1, cuda=True,integer_init=True):
+  def __init__(self, n, in_features, out_features, kernel_size, padding=0, stride=1, dilation=1, cuda=True):
     super(PHConv1D, self).__init__()
     self.n = n
     self.in_features = in_features
