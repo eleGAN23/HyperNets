@@ -1,7 +1,7 @@
 # HyperNets
 Hypercomplex Neural Networks with PyTorch: this repository would be a container for hypercomplex neural network modules to facilitate research in this topic. 
 
-### News
+### News :bomb:
 :warning: PHC layer for 1D convolutions has been released! Check it in the file `layers/ph_layers.py`!
 
 # Lightweight Convolutional Neural Networks By Hypercomplex Parameterization
@@ -14,14 +14,14 @@ Hypercomplex Neural Networks with PyTorch: this repository would be a container 
 <!-- [![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/lightweight-convolutional-neural-networks-by/on-1)](https://paperswithcode.com/sota/on-1?p=lightweight-convolutional-neural-networks-by) -->
 [![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/lightweight-convolutional-neural-networks-by/sound-event-detection-on-l3das21)](https://paperswithcode.com/sota/sound-event-detection-on-l3das21?p=lightweight-convolutional-neural-networks-by)
 
-## Abstract
+## Abstract :bookmark_tabs:
 
 Hypercomplex neural networks have proved to reduce the overall number of parameters while ensuring valuable performances by leveraging the properties of Clifford algebras. Recently, hypercomplex linear layers have been further improved by involving efficient parameterized Kronecker products. In this paper, we define the parameterization of hypercomplex convolutional layers to develop lightweight and efficient large-scale convolutional models. Our method grasps the convolution rules and the filters organization directly from data without requiring a rigidly predefined domain structure to follow. The proposed approach is flexible to operate in any user-defined or tuned domain, from 1D to nD regardless of whether the algebra rules are preset.
 Such a malleability allows processing multidimensional inputs in their natural domain without annexing further dimensions, as done, instead, in quaternion neural networks for 3D inputs like color images.
 As a result, the proposed method operates with 1/n free parameters as regards its analog in the real domain. We demonstrate the versatility of this approach to multiple domains of application by performing experiments on various image datasets as well as audio datasets in which our method outperforms real and quaternion-valued counterparts.
 
 
-## Parameterized Hypercomplex Convolutional (PHC) Layer
+## Parameterized Hypercomplex Convolutional (PHC) Layer :dart:
 
 The core of the approach is the sum of Kronecker products which grasps the convolution rule and the filters organization directly from data. The higlights of our approach is defined in:
 
@@ -45,9 +45,8 @@ Te PHC layer, by setting n=4, is able to subsume the Hamilton rule to organize f
 
 <img src="Hamilton_prod.png" width="872" height="228"/>
 
-## Usage
 
-## Tutorials
+## Tutorials :page_with_curl:
 
 The folder `tutorials` contain a set of tutorial to understand the Parameterized Hypercomplex Multiplication (PHM) layer and the Parameterized Hypercomplex Convolutional (PHC) layer. We develop simple toy examples to learn the matrices A that define algebra rules in order to demonstrate the effectiveness of the proposed approach.
 
@@ -55,7 +54,7 @@ The folder `tutorials` contain a set of tutorial to understand the Parameterized
 * `PHC tutorial.ipynb` is a simple tutorial which shows how the PHC layer learn the Hamilton rule to organize filters in convolution.
 * `Toy regression examples with PHM.ipynb` is a notebook containing some regression tasks.
 
-## Experiments on Image Classification
+## Experiments on Image Classification :city_sunset:
 
 To reproduce image classification experiments, please refer to the `image-classification` folder.
 
@@ -66,7 +65,7 @@ To reproduce image classification experiments, please refer to the `image-classi
 
 The experiment will be directly tracked on [Weight&Biases](https://wandb.ai/).
 
-## Experiments on Sound Event Detection
+## Experiments on Sound Event Detection :musical_score:
 
 To reproduce sound event detection experiments, please refer to the `sound-event-detection` folder.
 
@@ -99,11 +98,11 @@ We perform experiments with `epochs=1000`, `batch_size=16` and `input_channels=4
 
 Specify the hyperparameters options.
 
-## More will be added
+## More will be added :date:
 
 :warning: Soon!
 
-## Similar reporitories
+## Similar reporitories :busts_in_silhouette:
 
 * [Quaternion Generative Adversarial Networks](https://github.com/eleGAN23/QGAN).
 * [A Quaternion-Valued Variational Autoencoder](https://github.com/eleGAN23/QVAE).
