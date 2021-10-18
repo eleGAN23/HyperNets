@@ -64,14 +64,14 @@ class PHMLinear(nn.Module):
     bound = 1 / math.sqrt(fan_in)
     init.uniform_(self.bias, -bound, bound)
 
-#############################
-## CONVOLUTIONAL PHM LAYER ##
-#############################
+################################
+## PHC LAYER: 2D convolutions ##
+################################
 
-class PHMConv(Module):
+class PHMConv2d(Module):
 
   def __init__(self, n, in_features, out_features, kernel_size, padding=0, stride=1, cuda=True):
-    super(PHMConv, self).__init__()
+    super(PHMConv2d, self).__init__()
     self.n = n
     self.in_features = in_features
     self.out_features = out_features
@@ -127,3 +127,58 @@ class PHMConv(Module):
     fan_in, _ = init._calculate_fan_in_and_fan_out(self.placeholder)
     bound = 1 / math.sqrt(fan_in)
     init.uniform_(self.bias, -bound, bound)
+
+################################
+## PHC LAYER: 1D convolutions ##
+################################
+    
+class PHConv1D(Module):
+
+  def __init__(self, n, in_features, out_features, kernel_size, padding=0, stride=1, dilation=1, cuda=True,integer_init=True):
+    super(PHConv1D, self).__init__()
+    self.n = n
+    self.in_features = in_features
+    self.out_features = out_features
+    self.padding = padding
+    self.stride = stride
+    self.dilation=dilation
+    self.cuda = cuda
+
+    self.bias = nn.Parameter(torch.Tensor(out_features))
+
+    self.A = nn.Parameter(torch.nn.init.xavier_uniform_(torch.zeros((n, n, n))))
+    self.F = nn.Parameter(torch.nn.init.xavier_uniform_(
+        torch.zeros((n, self.out_features//n, self.in_features//n, kernel_size))))
+    self.weight = torch.zeros((self.out_features, self.in_features))
+    self.kernel_size = kernel_size
+
+    fan_in, _ = init._calculate_fan_in_and_fan_out(self.weight)
+    bound = 1 / math.sqrt(fan_in)
+    init.uniform_(self.bias, -bound, bound)
+
+  def kronecker_product1(self, A, F):
+    siz1 = torch.Size(torch.tensor(A.shape[-2:]) * torch.tensor(F.shape[-3:-1]))
+    siz2 = torch.Size(torch.tensor(F.shape[-1:]))
+    res = A.unsqueeze(-1).unsqueeze(-3).unsqueeze(-1) * F.unsqueeze(-3).unsqueeze(-5)
+    siz0 = res.shape[:1]
+    out = res.reshape(siz0 + siz1 + siz2)
+    return out
+
+  def kronecker_product2(self):
+    H = torch.zeros((self.out_features, self.in_features, self.kernel_size, self.kernel_size))
+    if self.cuda:
+        H = H.cuda()
+    for i in range(self.n):
+        kron_prod = torch.kron(self.a[i], self.s[i]).view(self.out_features, self.in_features, self.kernel_size, self.kernel_size)
+        H = H + kron_prod
+    return H
+
+  def forward(self, input):
+    self.weight = torch.sum(self.kronecker_product1(self.A, self.F), dim=0)
+    # self.weight = self.kronecker_product2()
+    if self.cuda:
+        self.weight = self.weight.cuda()
+
+    input = input.type(dtype=self.weight.type())
+        
+    return F.conv1d(input, weight=self.weight, stride=self.stride, padding=self.padding,dilation=self.dilation)
