@@ -107,6 +107,7 @@ Specify the hyperparameters options.
 
 * [Quaternion Generative Adversarial Networks](https://github.com/eleGAN23/QGAN).
 * [A Quaternion-Valued Variational Autoencoder](https://github.com/eleGAN23/QVAE).
+* [PHC-GNN](https://github.com/bayer-science-for-a-better-life/phc-gnn).
 
 Quaternion layers are borrowed from:
 
