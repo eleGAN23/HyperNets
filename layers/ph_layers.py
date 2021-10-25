@@ -80,8 +80,8 @@ class PHMConv2d(Module):
     self.cuda = cuda
 
     self.bias = nn.Parameter(torch.Tensor(out_features))
-    self.a = nn.Parameter(torch.nn.init.xavier_uniform_(torch.zeros((n, n, n))))
-    self.s = nn.Parameter(torch.nn.init.xavier_uniform_(
+    self.A = nn.Parameter(torch.nn.init.xavier_uniform_(torch.zeros((n, n, n))))
+    self.F = nn.Parameter(torch.nn.init.xavier_uniform_(
         torch.zeros((n, self.out_features//n, self.in_features//n, kernel_size, kernel_size))))
     self.weight = torch.zeros((self.out_features, self.in_features))
     self.kernel_size = kernel_size
@@ -90,10 +90,10 @@ class PHMConv2d(Module):
     bound = 1 / math.sqrt(fan_in)
     init.uniform_(self.bias, -bound, bound)
 
-  def kronecker_product1(self, a, s):
-    siz1 = torch.Size(torch.tensor(a.shape[-2:]) * torch.tensor(s.shape[-4:-2]))
-    siz2 = torch.Size(torch.tensor(s.shape[-2:]))
-    res = a.unsqueeze(-1).unsqueeze(-3).unsqueeze(-1).unsqueeze(-1) * s.unsqueeze(-4).unsqueeze(-6)
+  def kronecker_product1(self, A, F):
+    siz1 = torch.Size(torch.tensor(A.shape[-2:]) * torch.tensor(F.shape[-4:-2]))
+    siz2 = torch.Size(torch.tensor(F.shape[-2:]))
+    res = A.unsqueeze(-1).unsqueeze(-3).unsqueeze(-1).unsqueeze(-1) * F.unsqueeze(-4).unsqueeze(-6)
     siz0 = res.shape[:1]
     out = res.reshape(siz0 + siz1 + siz2)
     return out
@@ -103,12 +103,12 @@ class PHMConv2d(Module):
     if self.cuda:
         H = H.cuda()
     for i in range(self.n):
-        kron_prod = torch.kron(self.a[i], self.s[i]).view(self.out_features, self.in_features, self.kernel_size, self.kernel_size)
+        kron_prod = torch.kron(self.A[i], self.F[i]).view(self.out_features, self.in_features, self.kernel_size, self.kernel_size)
         H = H + kron_prod
     return H
 
   def forward(self, input):
-    self.weight = torch.sum(self.kronecker_product1(self.a, self.s), dim=0)
+    self.weight = torch.sum(self.kronecker_product1(self.A, self.F), dim=0)
     # self.weight = self.kronecker_product2()
     if self.cuda:
         self.weight = self.weight.cuda()
@@ -122,8 +122,8 @@ class PHMConv2d(Module):
       self.in_features, self.out_features, self.bias is not None)
     
   def reset_parameters(self) -> None:
-    init.kaiming_uniform_(self.a, a=math.sqrt(5))
-    init.kaiming_uniform_(self.s, a=math.sqrt(5))
+    init.kaiming_uniform_(self.A, a=math.sqrt(5))
+    init.kaiming_uniform_(self.F, a=math.sqrt(5))
     fan_in, _ = init._calculate_fan_in_and_fan_out(self.placeholder)
     bound = 1 / math.sqrt(fan_in)
     init.uniform_(self.bias, -bound, bound)
@@ -169,7 +169,7 @@ class PHConv1D(Module):
     if self.cuda:
         H = H.cuda()
     for i in range(self.n):
-        kron_prod = torch.kron(self.a[i], self.s[i]).view(self.out_features, self.in_features, self.kernel_size, self.kernel_size)
+        kron_prod = torch.kron(self.A[i], self.F[i]).view(self.out_features, self.in_features, self.kernel_size, self.kernel_size)
         H = H + kron_prod
     return H
 
@@ -180,5 +180,16 @@ class PHConv1D(Module):
         self.weight = self.weight.cuda()
 
     input = input.type(dtype=self.weight.type())
+    
+      def extra_repr(self) -> str:
+    return 'in_features={}, out_features={}, bias={}'.format(
+      self.in_features, self.out_features, self.bias is not None)
+    
+  def reset_parameters(self) -> None:
+    init.kaiming_uniform_(self.A, a=math.sqrt(5))
+    init.kaiming_uniform_(self.F, a=math.sqrt(5))
+    fan_in, _ = init._calculate_fan_in_and_fan_out(self.placeholder)
+    bound = 1 / math.sqrt(fan_in)
+    init.uniform_(self.bias, -bound, bound)
         
     return F.conv1d(input, weight=self.weight, stride=self.stride, padding=self.padding,dilation=self.dilation)
