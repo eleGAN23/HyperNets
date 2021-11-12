@@ -34,7 +34,7 @@ class PHMLinear(nn.Module):
     init.uniform_(self.bias, -bound, bound)
 
 
-  def kronecker_product1(self, a, b): #adapted from Bayer Research's implementation
+  def kronecker_product1(self, a, b):
     siz1 = torch.Size(torch.tensor(a.shape[-2:]) * torch.tensor(b.shape[-2:]))
     res = a.unsqueeze(-1).unsqueeze(-3) * b.unsqueeze(-2).unsqueeze(-4)
     siz0 = res.shape[:-4]
@@ -68,10 +68,10 @@ class PHMLinear(nn.Module):
 ## PHC LAYER: 2D convolutions ##
 ################################
 
-class PHMConv2d(Module):
+class PHConv2d(Module):
 
   def __init__(self, n, in_features, out_features, kernel_size, padding=0, stride=1, cuda=True):
-    super(PHMConv2d, self).__init__()
+    super(PHConv2d, self).__init__()
     self.n = n
     self.in_features = in_features
     self.out_features = out_features
