@@ -101,7 +101,10 @@ Specify the hyperparameters options.
 
 ## More will be added :date:
 
-:warning: Soon!
+:warning: Work in progress...
+
+* PHC for transposed convolutions
+* PHC in TensorFlow
 
 ## Similar reporitories :busts_in_silhouette:
 
