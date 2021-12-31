@@ -11,6 +11,6 @@
 --lr=0.01
 --optim=SGD
 --scheduler=cosine
---model=phmvgg19large
+--model=phcvgg19large
 --quat_data=True
 --n=4
