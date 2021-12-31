@@ -10,6 +10,6 @@
 --optim=SGD
 --momentum=0.9
 --scheduler=cosine
---model=phmresnet50large
+--model=phcresnet50large
 --quat_data=True
 --n=4
