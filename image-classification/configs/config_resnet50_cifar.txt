@@ -10,7 +10,7 @@
 --optim=SGD
 --momentum=0.9
 --scheduler=cosine
---model=phmresnet152large
+--model=phcresnet152large
 --quat_data=True
 --n=4
 --train_dir=/var/datasets/CIFAR100
