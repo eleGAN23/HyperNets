@@ -181,9 +181,9 @@ class PHConv1D(Module):
 
     input = input.type(dtype=self.weight.type())
     
-      def extra_repr(self) -> str:
-    return 'in_features={}, out_features={}, bias={}'.format(
-      self.in_features, self.out_features, self.bias is not None)
+    def extra_repr(self) -> str:
+      return 'in_features={}, out_features={}, bias={}'.format(
+        self.in_features, self.out_features, self.bias is not None)
     
   def reset_parameters(self) -> None:
     init.kaiming_uniform_(self.A, a=math.sqrt(5))
