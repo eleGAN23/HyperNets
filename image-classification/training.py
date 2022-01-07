@@ -109,6 +109,7 @@ class Trainer():
                 break
             for j, eval_data in enumerate(eval_loader, 0):
                 inputs, labels = eval_data
+                self.net.eval()
                 
                 if self.use_cuda:
                     inputs, labels = inputs.cuda('cuda:%i' %self.gpu_num), labels.cuda('cuda:%i' %self.gpu_num)
@@ -131,6 +132,7 @@ class Trainer():
             
             running_loss_train = 0.0
             running_loss_eval = 0.0
+            self.net.train()
 
 
         print('Finished Training')
