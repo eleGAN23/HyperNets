@@ -9,7 +9,7 @@ Thanks to Christian Brignone and Gioia Mancini for this contribution.
 
 ### [Eleonora Grassucci](https://scholar.google.it/citations?user=Jcv0TgQAAAAJ&hl=it&authuser=1), [Aston Zhang](https://www.astonzhang.com/), and [Danilo Comminiello](https://danilocomminiello.site.uniroma1.it/)
 
-[[Abstract on OpenReview](https://openreview.net/forum?id=S5qdnMhf7R)] [[Paper on OpenReview](https://openreview.net/pdf?id=S5qdnMhf7R)]
+[[ArXiv preprint](https://arxiv.org/pdf/2110.04176.pdf)]
 
 
 <!-- [![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/lightweight-convolutional-neural-networks-by/on-1)](https://paperswithcode.com/sota/on-1?p=lightweight-convolutional-neural-networks-by) -->
