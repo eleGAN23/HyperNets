@@ -7,7 +7,7 @@ Thanks to Christian Brignone and Gioia Mancini for this contribution.
 
 # Lightweight Convolutional Neural Networks By Hypercomplex Parameterization
 
-### [Eleonora Grassucci](https://scholar.google.it/citations?user=Jcv0TgQAAAAJ&hl=it&authuser=1), [Aston Zhang](https://www.astonzhang.com/), and [Danilo Comminiello](https://danilocomminiello.site.uniroma1.it/)
+### [Eleonora Grassucci](https://sites.google.com/view/eleonoragrassucci/home-page?authuser=0), [Aston Zhang](https://www.astonzhang.com/), and [Danilo Comminiello](https://danilocomminiello.site.uniroma1.it/)
 
 [[ArXiv preprint](https://arxiv.org/pdf/2110.04176.pdf)]
 
