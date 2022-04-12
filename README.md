@@ -5,7 +5,7 @@ Hypercomplex Neural Networks with PyTorch: this repository would be a container 
 :warning: PHC layer for 1D convolutions has been released! Check it in the file `layers/ph_layers.py`!
 Thanks to Christian Brignone and Gioia Mancini for this contribution.
 
-# Lightweight Convolutional Neural Networks By Hypercomplex Parameterization
+# PHNNs: Lightweight Neural Networks via Parameterized Hypercomplex Convolutions
 
 ### [Eleonora Grassucci](https://sites.google.com/view/eleonoragrassucci/home-page?authuser=0), [Aston Zhang](https://www.astonzhang.com/), and [Danilo Comminiello](https://danilocomminiello.site.uniroma1.it/)
 
@@ -105,6 +105,19 @@ Specify the hyperparameters options.
 
 * PHC for transposed convolutions
 * PHC in TensorFlow
+
+## Cite
+
+Please cite our work if you found it useful:
+
+```
+@article{grassucci2021PHNNs,
+      title={{PHNN}s: Lightweight Neural Networks via Parameterized Hypercomplex Convolutions}, 
+      author={Grassucci, E. and Zhang, A. and Comminiello, D.},
+      year={2021},
+      journal={arXiv preprint: arXiv:2110.04176}
+}
+```
 
 ## Similar reporitories :busts_in_silhouette:
 
