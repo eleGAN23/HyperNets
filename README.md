@@ -49,7 +49,7 @@ Te PHC layer, by setting n=4, is able to subsume the Hamilton rule to organize f
 
 ## Tutorials :page_with_curl:
 
-The folder `tutorials` contain a set of tutorial to understand the Parameterized Hypercomplex Multiplication (PHM) layer and the Parameterized Hypercomplex Convolutional (PHC) layer. We develop simple toy examples to learn the matrices A that define algebra rules in order to demonstrate the effectiveness of the proposed approach.
+The folder `tutorials` contains a set of tutorials to understand the Parameterized Hypercomplex Multiplication (PHM) layer and the Parameterized Hypercomplex Convolutional (PHC) layer. We develop simple toy examples to learn the matrices A that define algebra rules in order to demonstrate the effectiveness of the proposed approach.
 
 * `PHM tutorial.ipynb` is a simple tutorial which shows how the PHM layer learns the Hamilton product between two pure quaternions.
 * `PHC tutorial.ipynb` is a simple tutorial which shows how the PHC layer learn the Hamilton rule to organize filters in convolution.
