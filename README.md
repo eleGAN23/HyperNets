@@ -2,6 +2,8 @@
 Hypercomplex Neural Networks with PyTorch: this repository would be a container for hypercomplex neural network modules to facilitate research in this topic. 
 
 ### News :bomb:
+:warning: PHC layer for 3D convolutions has been released! Check it in the file `layers/ph_layers.py`!
+
 :warning: PHC layer for 1D convolutions has been released! Check it in the file `layers/ph_layers.py`!
 Thanks to Christian Brignone and Gioia Mancini for this contribution.
 
