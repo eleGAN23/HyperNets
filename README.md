@@ -11,7 +11,7 @@ Thanks to Christian Brignone and Gioia Mancini for this contribution.
 
 ### [Eleonora Grassucci](https://sites.google.com/view/eleonoragrassucci/home-page?authuser=0), [Aston Zhang](https://www.astonzhang.com/), and [Danilo Comminiello](https://danilocomminiello.site.uniroma1.it/)
 
-[[ArXiv preprint](https://arxiv.org/pdf/2110.04176.pdf)]
+[[ArXiv preprint](https://arxiv.org/pdf/2110.04176.pdf)][[IEEEXplore](https://ieeexplore.ieee.org/document/9983846)]
 
 
 <!-- [![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/lightweight-convolutional-neural-networks-by/on-1)](https://paperswithcode.com/sota/on-1?p=lightweight-convolutional-neural-networks-by) -->
@@ -116,9 +116,11 @@ Please cite our work if you found it useful:
 @article{grassucci2021PHNNs,
       title={{PHNN}s: Lightweight Neural Networks via Parameterized Hypercomplex Convolutions}, 
       author={Grassucci, E. and Zhang, A. and Comminiello, D.},
-      year={2021},
-      journal={arXiv preprint: arXiv:2110.04176}
-}
+      year={2022},
+      journal={IEEE Transactions on Neural Networks and Learning Systems}, 
+      year={2022},
+      pages={1-13},
+      doi={10.1109/TNNLS.2022.3226772}}
 ```
 
 ## Similar reporitories :busts_in_silhouette:
