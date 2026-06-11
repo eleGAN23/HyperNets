@@ -51,10 +51,11 @@ class PHMLinear(nn.Module):
     return H
 
   def forward(self, input):
-    self.weight = torch.sum(self.kronecker_product1(self.A, self.S), dim=0)
+    weight = torch.sum(self.kronecker_product1(self.A, self.S), dim=0) # no self.weight; free GC
 #     self.weight = self.kronecker_product2() <- SLOWER
-    input = input.type(dtype=self.weight.type())
-    return F.linear(input, weight=self.weight, bias=self.bias)
+    #input = input.type(dtype=self.weight.type())
+    input = input.to(dtype=weight.dtype)
+    return F.linear(input, weight=weight, bias=self.bias)
 
   def extra_repr(self) -> str:
     return 'in_features={}, out_features={}, bias={}'.format(
